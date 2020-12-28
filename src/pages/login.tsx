@@ -1,21 +1,22 @@
-import React from 'react';
-import { Formik, Form } from 'formik';
-import { Wrapper } from '../components/Wrapper';
-import { InputField } from '../components/InputField';
-import { Box, Button } from '@chakra-ui/core';
-import { useLoginMutation } from '../generated/graphql';
-import { toErrorMap } from '../utils/toErrorMap';
-import { useRouter } from 'next/router'
-import { withUrqlClient } from 'next-urql';
-import { createUrqlClient } from '../utils/createUrqlClient';
+import React from "react";
+import NextLink from "next/link"
+import { Formik, Form } from "formik";
+import { Wrapper } from "../components/Wrapper";
+import { InputField } from "../components/InputField";
+import { Box, Button, Flex, Link } from "@chakra-ui/core";
+import { useLoginMutation } from "../generated/graphql";
+import { toErrorMap } from "../utils/toErrorMap";
+import { useRouter } from "next/router"
+import { withUrqlClient } from "next-urql";
+import { createUrqlClient } from "../utils/createUrqlClient";
 
 interface registerProps {
 
 }
 
 const Login: React.FC<{}> = ({}) => {
-  const router = useRouter()
-  const [, login] = useLoginMutation()
+  const router = useRouter();
+  const [, login] = useLoginMutation();
   return (
     <Wrapper variant="small">
       <Formik
@@ -44,6 +45,11 @@ const Login: React.FC<{}> = ({}) => {
                 label="Password"
               />
             </Box>
+            <Flex mt={2}>
+              <NextLink href="/forgot-password">
+                <Link ml="auto" >forgot password?</Link>
+              </NextLink>
+            </Flex>
             <Button mt={4} type="submit" isLoading={isSubmitting} variantColor="teal">Login</Button>
           </Form>
         )}
